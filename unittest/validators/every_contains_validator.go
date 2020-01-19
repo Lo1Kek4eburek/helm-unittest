@@ -78,14 +78,14 @@ func keyValueMatch(actual interface{}, expected interface{}, regex bool, negativ
 	var match = true
 	for _, k := range exp.MapKeys() {
 		var expectedString = fmt.Sprintf("%v", exp.MapIndex(k))
-		var actualString = fmt.Sprintf("%v", act.MapIndex(k))
+		actIndex := act.MapIndex(k)
 		if regex {
 			p, _ := regexp.Compile(expectedString)
-			if !p.MatchString(actualString) != negative {
+			if actIndex.IsValid() == false || !p.MatchString(fmt.Sprintf("%v", actIndex)) != negative {
 				match = false
 			}
 		} else {
-			if (expectedString != actualString) != negative {
+			if actIndex.IsValid() == false || (expectedString != fmt.Sprintf("%v", actIndex)) != negative {
 				match = false
 			}
 		}
