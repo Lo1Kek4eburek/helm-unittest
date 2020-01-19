@@ -124,6 +124,7 @@ var assertTypeMapping = map[string]assertTypeDef{
 	"notMatchRegex": {reflect.TypeOf(validators.MatchRegexValidator{}), true},
 	"contains":      {reflect.TypeOf(validators.ContainsValidator{}), false},
 	"notContains":   {reflect.TypeOf(validators.ContainsValidator{}), true},
+	"everyContains": {reflect.TypeOf(validators.EveryContainsValidator{}), false},
 	"isNull":        {reflect.TypeOf(validators.IsNullValidator{}), false},
 	"isNotNull":     {reflect.TypeOf(validators.IsNullValidator{}), true},
 	"isEmpty":       {reflect.TypeOf(validators.IsEmptyValidator{}), false},

@@ -3,6 +3,7 @@ package validators
 import (
 	"fmt"
 	"regexp"
+	"strconv"
 
 	"github.com/lrills/helm-unittest/unittest/common"
 	"github.com/lrills/helm-unittest/unittest/valueutils"
@@ -49,6 +50,13 @@ func (v MatchRegexValidator) Validate(context *ValidateContext) (bool, []string)
 			return true, []string{}
 		}
 		return false, v.failInfo(s, context.Negative)
+	}
+	if s, ok := actual.(int); ok {
+		str := strconv.Itoa(s)
+		if p.MatchString(str) != context.Negative {
+			return true, []string{}
+		}
+		return false, v.failInfo(str, context.Negative)
 	}
 
 	return false, splitInfof(errorFormat, fmt.Sprintf(
